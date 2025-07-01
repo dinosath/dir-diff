@@ -78,7 +78,7 @@ fn line_endings() {
     let dir2 = "tests/line_endings/dir2";
     create_dir_all(dir1).unwrap();
     create_dir_all(dir2).unwrap();
-    write(format!("{}/file.txt", dir1), "{\n  \"directory\": \"examples/filters\",\n  \"answers\": {\n    \"project_name\": \"project name is filters\"\n  }\n}").unwrap();
-    write(format!("{}/file.txt", dir2), "{\r\n  \"directory\": \"examples/filters\",\r\n  \"answers\": {\r\n    \"project_name\": \"project name is filters\"\r\n  }\r\n}").unwrap();
+    write(format!("{dir1}/file.txt"), "{\n  \"directory\": \"examples/filters\",\n  \"answers\": {\n    \"project_name\": \"project name is filters\"\n  }\n}").unwrap();
+    write(format!("{dir2}/file.txt"), "{\r\n  \"directory\": \"examples/filters\",\r\n  \"answers\": {\r\n    \"project_name\": \"project name is filters\"\r\n  }\r\n}").unwrap();
     assert!(dir_diff::is_different(dir1, dir2).unwrap());
 }
