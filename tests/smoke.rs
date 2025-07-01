@@ -70,3 +70,15 @@ fn filedepth() {
         dir_diff::is_different("tests/filedepth/desc/dir1", "tests/filedepth/desc/dir2").unwrap()
     );
 }
+
+#[test]
+fn line_endings() {
+    use std::fs::{create_dir_all, write};
+    let dir1 = "tests/line_endings/dir1";
+    let dir2 = "tests/line_endings/dir2";
+    create_dir_all(dir1).unwrap();
+    create_dir_all(dir2).unwrap();
+    write(format!("{}/file.txt", dir1), "{\n  \"directory\": \"examples/filters\",\n  \"answers\": {\n    \"project_name\": \"project name is filters\"\n  }\n}").unwrap();
+    write(format!("{}/file.txt", dir2), "{\r\n  \"directory\": \"examples/filters\",\r\n  \"answers\": {\r\n    \"project_name\": \"project name is filters\"\r\n  }\r\n}").unwrap();
+    assert!(dir_diff::is_different(dir1, dir2).unwrap());
+}
